@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_Dashboard"
+        android:icon="@drawable/ic_calendar"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/nav_attendance"
+        android:icon="@drawable/ic_check"
+        android:title="Mark Attendance" />
+
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_user"
+        android:title="Profile" />
+</menu>

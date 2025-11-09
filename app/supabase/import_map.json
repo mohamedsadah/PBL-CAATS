@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "firebase-admin/": "https://esm.sh/firebase-admin@11.11.1/",
+    "firebase-admin": "https://esm.sh/firebase-admin@11.11.1/app"
+  }
+}

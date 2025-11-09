@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610537730489",
+    "project_id": "caats-e4553",
+    "storage_bucket": "caats-e4553.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610537730489:android:0e7bb9f1c175ee21b10668",
+        "android_client_info": {
+          "package_name": "com.example.caats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXR3Ffx0060G7RxvCX3ntoSOms2IXhOuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
