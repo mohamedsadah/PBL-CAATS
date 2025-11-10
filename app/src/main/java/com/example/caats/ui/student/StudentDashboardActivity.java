@@ -50,6 +50,8 @@ public class StudentDashboardActivity extends AppCompatActivity {
         startBackgroundAnimation();
         setupRecyclerView();
 
+        handleNotificationIntent(getIntent());
+
         String studentId = PreferenceManager.getUserId(this);
         Log.d("StudentDashboardActivity", "Student ID: " + studentId);
 
@@ -314,12 +316,34 @@ public class StudentDashboardActivity extends AppCompatActivity {
                 return dateTimeString;
             }
         } else {
-            // Fallback for older Android versions
             try {
-                return dateTimeString.substring(11, 16); // Example: "22:57"
+                return dateTimeString.substring(11, 16);
             } catch (Exception e) {
                 return dateTimeString;
             }
         }
+    }
+
+    private void handleNotificationIntent(Intent intent) {
+        Log.d("SplashActivity", "handleNotificationIntent:" + intent);
+        if (intent != null && intent.getExtras() != null) {
+            String navigateTo = intent.getExtras().getString("navigate_to");
+
+            if ("MARK_ATTENDANCE".equals(navigateTo)) {
+                Intent attendanceIntent = new Intent(this, MarkAttendanceActivity.class);
+                startActivity(attendanceIntent);
+
+                // Clear the extra so it doesn't trigger again
+                intent.removeExtra("navigate_to");
+            }
+        }
+    }
+
+    //  handle notifications if the Dashboard is already open
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleNotificationIntent(intent);
     }
 }

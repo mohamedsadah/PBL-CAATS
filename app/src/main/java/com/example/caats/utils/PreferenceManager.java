@@ -7,6 +7,7 @@ public class PreferenceManager {
 
     private static final String PREF_NAME = "CAATS_PREFS";
     private static final String KEY_ACCESS_TOKEN = "access_token";
+    private static final String KEY_REFRESH_TOKEN = "refresh_token";
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_ROLE = "role";
     private static final String KEY_FULL_NAME = "full_name";
@@ -27,19 +28,13 @@ public class PreferenceManager {
     }
 
     public static void saveRefreshToken(Context context, String refreshToken) {
-        context.getSharedPreferences("SupabasePrefs", Context.MODE_PRIVATE)
-                .edit()
-                .putString("refresh_token", refreshToken)
-                .apply();
+        getPrefs(context).edit().putString(KEY_REFRESH_TOKEN, refreshToken).apply();
     }
 
     public static String getRefreshToken(Context context) {
-        return context.getSharedPreferences("SupabasePrefs", Context.MODE_PRIVATE)
-                .getString("refresh_token", null);
+        return getPrefs(context).getString(KEY_REFRESH_TOKEN, null);
     }
 
-
-    // Save user ID
     public static void saveUserId(Context context, String userId) {
         getPrefs(context).edit().putString(KEY_USER_ID, userId).apply();
     }
@@ -57,7 +52,6 @@ public class PreferenceManager {
         return getPrefs(context).getString(KEY_ROLE, null);
     }
 
-    // Save name
     public static void saveFullName(Context context, String fullName) {
         getPrefs(context).edit().putString(KEY_FULL_NAME, fullName).apply();
     }
@@ -66,17 +60,12 @@ public class PreferenceManager {
         return getPrefs(context).getString(KEY_FULL_NAME, null);
     }
 
-    // Save email
     public static void saveEmail(Context context, String email) {
         getPrefs(context).edit().putString(KEY_EMAIL, email).apply();
     }
 
     public static String getEmail(Context context) {
         return getPrefs(context).getString(KEY_EMAIL, null);
-    }
-
-    public static void clearAll(Context context) {
-        getPrefs(context).edit().clear().apply();
     }
 
     public static void saveImageUrl(Context context, String imageUrl) {
@@ -89,8 +78,11 @@ public class PreferenceManager {
         editor.apply();
     }
 
-
     public static String getImageUrl(Context context) {
         return getPrefs(context).getString(KEY_PROFILE_IMAGE_URL, null);
+    }
+
+    public static void clearAll(Context context) {
+        getPrefs(context).edit().clear().apply();
     }
 }

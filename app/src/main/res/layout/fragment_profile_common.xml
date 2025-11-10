@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="24dp">
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg22"
+        android:scaleType="centerCrop"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileCard"
+        android:layout_marginBottom="10dp"
+        app:strokeColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_centerInParent="true">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profileImageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="40dp"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLargeIncreased"
         android:src="@drawable/ic_profile_placeholder"
-        app:strokeColor="?attr/colorPrimary"
-        app:strokeWidth="3dp" />
+        app:strokeColor="@color/primary_blue"
+        app:strokeWidth="10dp" />
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/changePictureButton"
@@ -44,24 +71,35 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:text="Logout"
         app:icon="@drawable/ic_logout"
+        app:iconTint="@color/white"
+        android:backgroundTint="@color/rose_red"
         app:strokeColor="?attr/colorError"
-        android:textColor="?attr/colorError"/>
+        android:textColor="@color/white"/>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="45dp"
+        app:cardCornerRadius="30dp"
+        android:layout_below="@id/profileCard"
+        app:strokeColor="@color/white">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_back"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="start"
         android:background="@drawable/ic_back" />
 
+    </com.google.android.material.card.MaterialCardView>
 
 
-</LinearLayout>
+</RelativeLayout>

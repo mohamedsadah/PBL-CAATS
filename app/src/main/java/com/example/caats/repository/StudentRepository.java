@@ -1,5 +1,7 @@
 package com.example.caats.repository;
 
+import static com.example.caats.repository.CoordinatorRepository.parseError;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -10,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +40,11 @@ public class StudentRepository {
 
     public interface MarkAttendanceCallback {
         void onSuccess(String message);
+        void onError(String error);
+    }
+
+    public interface FcmTokenCallback {
+        void onSuccess();
         void onError(String error);
     }
 
@@ -143,7 +151,7 @@ public class StudentRepository {
                     if ("success".equals(status)) {
                         callback.onSuccess(message);
                     } else {
-                        callback.onError(message); // e.g., "You are not inside the classroom."
+                        callback.onError(message);
                     }
                 } else {
                     callback.onError("Failed to mark attendance.");
@@ -152,6 +160,31 @@ public class StudentRepository {
             // ... onFailure ...
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void updateFcmToken(Context context, String authUid, String fcmToken, FcmTokenCallback callback) {
+        AuthService service = SupabaseClient.getRestClient(context).create(AuthService.class);
+
+        JsonObject body = new JsonObject();
+        body.addProperty("fcm_token", fcmToken);
+
+        String authUidFilter = "eq." + authUid;
+
+        service.updateProfile(authUidFilter, body).enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                } else {
+                    callback.onError(parseError(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                 callback.onError("Network error: " + t.getMessage());
             }
         });

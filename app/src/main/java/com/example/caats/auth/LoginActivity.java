@@ -9,16 +9,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.caats.R;
 import com.example.caats.network.SupabaseClient;
 import com.example.caats.repository.AuthRepository;
+import com.example.caats.repository.StudentRepository;
 import com.example.caats.ui.cordinator.CoordinatorActivity;
 import com.example.caats.ui.student.StudentDashboardActivity;
 import com.example.caats.ui.tutor.TutorDashboardActivity;
 import com.example.caats.utils.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
@@ -79,37 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "Refresh token: " + refreshToken);
                 Log.d(TAG, "User ID: " + userId);
 
-                // Redirect user to dashboard
-                switch (role) {
-                    case "student":
-                        if(role.equals(urole)) {
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, StudentDashboardActivity.class));
-                        }else{
-                            Toast.makeText(LoginActivity.this, "You are not a student", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        break;
-                    case "tutor":
-                        if(role.equals(urole)) {
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, TutorDashboardActivity.class));
-                        }else{
-                            Toast.makeText(LoginActivity.this, "You are not a tutor", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        break;
-                    case "coordinator":
-                        if(role.equals(urole)) {
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, CoordinatorActivity.class));
-                        }else{
-                            Toast.makeText(LoginActivity.this, "You are not a coordinator", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        break;
-                }
-
                 // Save session details
                 PreferenceManager.saveToken(LoginActivity.this, accessToken);
                 PreferenceManager.saveRefreshToken(LoginActivity.this, refreshToken);
@@ -118,9 +92,48 @@ public class LoginActivity extends AppCompatActivity {
                 PreferenceManager.saveUserId(LoginActivity.this, userId);
                 PreferenceManager.saveFullName(LoginActivity.this, uname);
                 Log.d(TAG, "Login successful");
+                Log.d(TAG, "token: " + PreferenceManager.getToken(LoginActivity.this));
 
 
-                finish(); // Close login screen
+                getAndSaveFcmToken(userId);
+
+                // Redirect user to dashboard
+                switch (role) {
+                    case "student":
+                        if(role.equals(urole)) {
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, StudentDashboardActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "You are not registered as a student", Toast.LENGTH_SHORT).show();
+                            PreferenceManager.clearAll(LoginActivity.this);
+                            return;
+                        }
+                        break;
+                    case "tutor":
+                        if(role.equals(urole)) {
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, TutorDashboardActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "You are not registered as a tutor", Toast.LENGTH_SHORT).show();
+                            PreferenceManager.clearAll(LoginActivity.this);
+                            return;
+                        }
+                        break;
+                    case "coordinator":
+                        if(role.equals(urole)) {
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, CoordinatorActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "You are not registered as a coordinator", Toast.LENGTH_SHORT).show();
+                            PreferenceManager.clearAll(LoginActivity.this);
+                            return;
+                        }
+                        break;
+                }
+
             }
 
             @Override
@@ -139,5 +152,35 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getAndSaveFcmToken(String authUid) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("LoginActivity", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("LoginActivity", "FCM Token: " + token);
+
+                        // Send token to Supabase
+                        StudentRepository.updateFcmToken(LoginActivity.this, authUid, token, new StudentRepository.FcmTokenCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("LoginActivity", "FCM Token saved to Supabase.");
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                Log.e("LoginActivity", "Failed to save FCM Token: " + error);
+                            }
+                        });
+                    }
+                });
     }
 }

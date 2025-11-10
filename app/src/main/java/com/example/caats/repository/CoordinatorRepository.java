@@ -157,7 +157,7 @@ public class CoordinatorRepository {
 
     // Helper to parse error messages from failed Retrofit responses.
 
-    private static String parseError(Response<?> response) {
+    static String parseError(Response<?> response) {
         String errorMsg = "An unknown error occurred (Code: " + response.code() + ")";
         if (response.errorBody() != null) {
             try {
