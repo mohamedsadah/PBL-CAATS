@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SupabaseClient {
 
     public static final String SUPABASE_URL = "https://dqrfgdwzpxaajdqenuqf.supabase.co/";
-    public static final String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcmZnZHd6cHhhYWpkcWVudXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxMjg3MzQsImV4cCI6MjA3MzcwNDczNH0.ZoSWr4YvMjmNRKwubqi6JESLROi9rOeaQIYMdZ9bnRU";
+    public static final String API_KEY = "--------------";
 
     private static Retrofit authRetrofit = null;
     private static Retrofit restRetrofit = null;
