@@ -30,6 +30,7 @@
                 android:layout_toStartOf="@id/studentPercentageTextView"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 tools:text="Ashutosh Kumar" />
 
             <TextView
@@ -37,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/studentNameTextView"
-                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textColor="@color/black"
                 tools:text="220011" />
 
             <TextView
@@ -48,7 +49,7 @@
                 android:layout_centerVertical="true"
                 android:textAppearance="?attr/textAppearanceHeadlineSmall"
                 android:textStyle="bold"
-                android:textColor="?attr/colorError"
+                android:textColor="@color/rose_red"
                 tools:text="65%" />
         </RelativeLayout>
 

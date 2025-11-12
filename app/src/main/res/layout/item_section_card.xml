@@ -14,6 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black"
         android:padding="20dp">
 
         <LinearLayout
@@ -28,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Section A"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textStyle="bold" />
 
@@ -38,7 +39,7 @@
                 android:layout_height="wrap_content"
                 tools:text="MCA - Semester 3"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnSurfaceVariant" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

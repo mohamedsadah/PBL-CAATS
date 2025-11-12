@@ -56,6 +56,7 @@ public class AuthRepository {
 
                         String accessToken = json.get("access_token").getAsString();
                         String refreshToken = json.get("refresh_token").getAsString();
+                        Log.d(TAG, "rtoken"+ refreshToken);
                         String userId = json.getAsJsonObject("user").get("id").getAsString();
                         String userName = json.getAsJsonObject("user").get("user_metadata").getAsJsonObject().get("full_name").getAsString();
                         String role = json.getAsJsonObject("user").get("user_metadata").getAsJsonObject().get("role").getAsString();
@@ -143,8 +144,8 @@ public class AuthRepository {
                                 Log.w("CAATS-Auth", "Access token expired, retrying with refresh...");
 
                                 // Trigger refresh again using refreshAccessToken async version
-                                SharedPreferences prefs = context.getSharedPreferences("SupabasePrefs", Context.MODE_PRIVATE);
-                                String refreshToken = prefs.getString("refresh_token", null);
+//                                SharedPreferences prefs = context.getSharedPreferences("SupabasePrefs", Context.MODE_PRIVATE);
+                                String refreshToken = PreferenceManager.getToken(context);
 
                                 if (refreshToken == null) {
                                     callback.onError("No refresh token found. Please log in again.");

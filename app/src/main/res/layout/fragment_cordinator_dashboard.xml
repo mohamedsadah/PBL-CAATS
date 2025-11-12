@@ -11,7 +11,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="5dp"
         android:padding="10dp">
 
@@ -22,8 +22,9 @@
         android:textAppearance="?attr/textAppearanceTitleLargeEmphasized"
         android:textStyle="bold"
         android:paddingHorizontal="16dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="55dp"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
         tools:text="Welcome, Coordinator" />
 
     </com.google.android.material.card.MaterialCardView>

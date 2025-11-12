@@ -92,7 +92,7 @@ public class CreateSessionFragment extends BottomSheetDialogFragment {
     }
 
     private void fetchTable(String table, MaterialAutoCompleteTextView target, Map<String, String> map) {
-        AuthRepository.fetchTable(requireContext(), table, new AuthRepository.FetchTableCallback() {
+        AuthRepository.fetchPublicTable(requireContext(), table, new AuthRepository.FetchTableCallback() {
             @Override
             public void onSuccess(String response) {
                 try {
@@ -121,7 +121,7 @@ public class CreateSessionFragment extends BottomSheetDialogFragment {
                     requireActivity().runOnUiThread(() -> {
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                 requireContext(),
-                                android.R.layout.simple_dropdown_item_1line,
+                                R.layout.list_item_dropdown,
                                 items
                         );
                         target.setAdapter(adapter);

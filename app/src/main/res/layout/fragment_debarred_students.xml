@@ -21,6 +21,7 @@
             app:navigationIcon="@drawable/ic_back"
             app:navigationIconTint="@color/purple_500"
             android:layout_marginTop="45dp"
+            app:titleTextColor="@color/rose_red"
             app:title="Debarred Students" />
     </LinearLayout>
 
@@ -43,6 +44,7 @@
             android:id="@+id/studentSearchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 

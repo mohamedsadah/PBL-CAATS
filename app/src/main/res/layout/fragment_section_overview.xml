@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_back"
         android:layout_marginTop="45dp"
+        app:titleTextColor="@color/black"
         app:navigationIconTint="@color/purple_500"
         app:title="Section B"
         tools:title="Section B" />

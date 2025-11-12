@@ -37,9 +37,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:hintTextColor="@color/black"
+                android:layout_marginTop="55dp"
                 app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp"
+                app:boxBackgroundColor="@color/white"
+                app:hintTextColor="@color/black"
+                android:background="@color/white"
                 android:hint="Select Subject">
 
                 <AutoCompleteTextView
@@ -48,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:inputType="none"
-                    tools:text="Mobile App Development" />
+                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -62,7 +65,7 @@
                 app:cardElevation="4dp"
                 tools:visibility="visible">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -73,6 +76,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="40dp"
                         android:text="Overall Subject Attendance"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignStart="@id/overallSubjectPercentage"
+                        android:layout_centerVertical="true"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="@color/white" />
 
@@ -80,14 +86,14 @@
                         android:id="@+id/overallSubjectPercentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:textAppearance="?attr/textAppearanceHeadlineMedium"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         tools:text="82%" />
-                </LinearLayout>
+                </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
@@ -98,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="16dp"
-            app:hintTextColor="@color/black"
+            app:hintTextColor="@color/white"
             android:hint="Search student name..."
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -111,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
@@ -131,6 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:backgroundTint="@color/white"
         android:padding="50dp">
             <TextView
                 android:id="@+id/emptyViewTextView"
@@ -155,7 +162,7 @@
         android:layout_above="@id/bottom_nav"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/light_blue"
         android:contentDescription="Download Report as PDF"
         app:srcCompat="@drawable/ic_download" />
 
